@@ -11,7 +11,7 @@ public:
     this->V = V;
     adj.resize(V);
   }
-
+  // Random
   void addEdge(int u, int v) {
     adj[u].push_back(v);
     adj[v].push_back(u); // Undirected graph
