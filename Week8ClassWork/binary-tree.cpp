@@ -32,7 +32,7 @@ int main() {
   root->left->left = new Node(2);  // left
   root->left->right = new Node(7); // right
 
-  cout << "In-order traversal: ";
+  cout << "Inorder traversal: ";
   in_order(root);
   cout << endl;
 
