@@ -38,6 +38,7 @@ int main() {
       PayRoll(18.25, 0),
   };
 
+  // Iterates over employee data's setter function to set number of hours
   for (int i = 0; i < numEmployees; i++) {
     double hours;
     cout << "Enter hours worked for Employee " << i + 1 << ":\n";
