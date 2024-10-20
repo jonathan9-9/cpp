@@ -5,6 +5,8 @@
     "ostream": "cpp",
     "queue": "cpp",
     "unordered_map": "cpp",
-    "string": "cpp"
-  }
+    "string": "cpp",
+    "iomanip": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }
