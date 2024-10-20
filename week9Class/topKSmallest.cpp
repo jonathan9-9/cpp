@@ -7,24 +7,24 @@ using namespace std;
 // largest elements
 
 vector<int> topKElements(const vector<int> &nums, int k) {
-  priority_queue<int, vector<int>, greater<int>> minHeap;
+  priority_queue<int> maxHeap;
 
   for (int i = 0; i < k; i++) {
-    minHeap.push(nums[i]);
+    maxHeap.push(nums[i]);
   }
 
   for (int i = k; i < nums.size(); i++) {
-    if (nums[i] > minHeap.top()) {
-      minHeap.pop();
-      minHeap.push(nums[i]);
+    if (nums[i] < maxHeap.top()) {
+      maxHeap.pop();
+      maxHeap.push(nums[i]);
     }
   }
 
   vector<int> topK;
 
-  while (!minHeap.empty()) {
-    topK.push_back(minHeap.top());
-    minHeap.pop();
+  while (!maxHeap.empty()) {
+    topK.push_back(maxHeap.top());
+    maxHeap.pop();
   }
 
   return topK;
@@ -36,7 +36,9 @@ int main() {
 
   vector<int> topK = topKElements(nums, k);
 
-  cout << "Top " << k << " largest elements are: ";
+  sort(topK.begin(), topK.end());
+
+  cout << "Top " << k << " smallest elements are: ";
 
   for (int num : topK) {
     cout << " " << num;
