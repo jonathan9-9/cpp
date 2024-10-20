@@ -6,7 +6,7 @@ using namespace std;
 // Program finds k largest elements using a minimum heap to efficiently find k
 // largest elements
 
-vector<int> topKElements(const vector<int> &nums, int k) {
+vector<int> topKSmallestElements(const vector<int> &nums, int k) {
   priority_queue<int> maxHeap;
 
   for (int i = 0; i < k; i++) {
@@ -34,7 +34,7 @@ int main() {
   vector<int> nums = {4, 3, 10, 9, 17, 20, 80, 40, 45};
   int k = 3;
 
-  vector<int> topK = topKElements(nums, k);
+  vector<int> topK = topKSmallestElements(nums, k);
 
   sort(topK.begin(), topK.end());
 
