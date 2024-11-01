@@ -24,6 +24,16 @@ private:
 public:
   DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
+  // Copy constructor
+  DoublyLinkedList(const DoublyLinkedList &other)
+      : head(nullptr), tail(nullptr) {
+    Node *current = other.head;
+    while (current != nullptr) {
+      append(current->value);
+      current = current->next;
+    }
+  }
+
   // inserting new node at the end of the doubly linked list
   void append(int value) {
     Node *newNode = new Node(value);
@@ -106,9 +116,30 @@ public:
       delete temp;
     }
   }
+
+  void displayList() {
+    Node *current = head;
+    while (current != nullptr) {
+      cout << current->value << " ";
+      current = current->next;
+    }
+    cout << "\n";
+  }
 }
 
+// Driver program
 int main() {
   DoublyLinkedList list;
+
+  list.append(10);
+  list.append(50);
+  list.append(100);
+
+  cout << "Original list: ";
+  list.displayList();
+
+  DoublyLinkedList copiedList(list);
+  cout << "Coped List: ";
+  copiedList.displayList();
   return 0;
 }
