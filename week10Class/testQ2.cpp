@@ -1,13 +1,5 @@
-//
-
 #include <iostream>
 using namespace std;
-
-void swap(int &a, int &b) {
-  int temp = a;
-  a = b;
-  b = temp;
-}
 
 void selectionSort(int arr[], int size, int &count) {
   int minIndex, minValue;
@@ -45,36 +37,28 @@ void bubbleSort(int arr[], int size, int &count) {
   }
 }
 
+void displayArray(int arr[], int numElements) {
+  for (int i = 0; i < numElements; i++) {
+    cout << arr[i] << " ";
+  }
+  cout << endl;
+}
+
 int main() {
-  int arr1[20] = {42, 17, 88, 3,  54, 29, 71, 16, 90, 23,
-                  5,  38, 65, 12, 77, 49, 34, 10, 95, 68};
+  const int SIZE = 20;
+  int array1[SIZE] = {29, 10, 14, 37, 13, 25, 19, 44, 55, 35,
+                      11, 2,  8,  3,  15, 5,  42, 7,  1,  20};
+  int array2[SIZE] = {29, 10, 14, 37, 13, 25, 19, 44, 55, 35,
+                      11, 2,  8,  3,  15, 5,  42, 7,  1,  20};
 
-  int arr2[20] = {42, 17, 88, 3,  54, 29, 71, 16, 90, 23,
-                  5,  38, 65, 12, 77, 49, 34, 10, 95, 68};
-  int size1 = sizeof(arr1) / sizeof(arr1[0]);
-  int size2 = sizeof(arr2) / sizeof(arr2[0]);
+  int selectionCount = 0;
+  int bubbleCount = 0;
 
-  int selectionExchanges = 0;
-  int bubbleExchanges = 0;
+  selectionSort(array1, SIZE, selectionCount);
+  displayArray(array1, SIZE);
 
-  bubbleSort(arr1, size1, bubbleExchanges);
-  selectionSort(arr2, size2, selectionExchanges);
+  bubbleSort(array2, SIZE, bubbleCount);
+  displayArray(array2, SIZE);
 
-  cout << "Array is now sorted(bubbleSort): " << endl;
-
-  for (int i = 0; i < size1; i++) {
-    cout << arr1[i] << " ";
-  }
-  cout << endl;
-  cout << "Selection sort number of exchanges: " << selectionExchanges << endl;
-
-  cout << "Second array sorted(selectionSort): " << endl;
-
-  for (int i = 0; i < size2; i++) {
-    cout << arr2[i] << " ";
-  }
-  cout << endl;
-
-  cout << "Bubble sort number of exchanges: " << bubbleExchanges << endl;
   return 0;
 }
