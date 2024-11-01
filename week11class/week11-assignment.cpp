@@ -1,9 +1,3 @@
-// member functions: appending, inserting, and deleting nodes
-// Destructor to delete all nodes in the list
-// driver program
-// print member function: before and after
-// copy constructor
-
 #include <iostream>
 using namespace std;
 
@@ -32,7 +26,7 @@ public:
       append(current->value);
       current = current->next;
     }
-  }
+  };
 
   // inserting new node at the end of the doubly linked list
   void append(int value) {
@@ -117,6 +111,16 @@ public:
     }
   }
 
+  void clear() {
+    Node *current = head;
+    while (current != nullptr) {
+      Node *temp = current;
+      current = current->next;
+      delete temp;
+    }
+    head = tail = nullptr; // Reset head and tail
+  }
+
   void displayList() {
     Node *current = head;
     while (current != nullptr) {
@@ -125,7 +129,7 @@ public:
     }
     cout << "\n";
   }
-}
+};
 
 // Driver program
 int main() {
@@ -141,5 +145,12 @@ int main() {
   DoublyLinkedList copiedList(list);
   cout << "Coped List: ";
   copiedList.displayList();
+
+  //   DoublyLinkedList emptyList;
+  list.clear();
+  cout << "Empty List: ";
+  list.displayList();
+  //   emptyList.displayList();
+
   return 0;
 }
