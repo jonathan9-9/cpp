@@ -111,16 +111,6 @@ public:
     }
   }
 
-  void clear() {
-    Node *current = head;
-    while (current != nullptr) {
-      Node *temp = current;
-      current = current->next;
-      delete temp;
-    }
-    head = tail = nullptr; // Reset head and tail
-  }
-
   void displayList() {
     Node *current = head;
     while (current != nullptr) {
@@ -147,8 +137,8 @@ int main() {
   copiedList.displayList();
 
   DoublyLinkedList emptyList;
-  emptyList.displayList();
   cout << "Empty List: ";
+  emptyList.displayList();
 
   return 0;
 }
