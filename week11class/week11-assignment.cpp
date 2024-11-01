@@ -16,6 +16,7 @@ private:
   Node *tail;
 
 public:
+  // Constructor
   DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
   // Copy constructor
@@ -128,6 +129,7 @@ int main() {
   list.append(10);
   list.append(50);
   list.append(100);
+  list.prepend(3);
 
   cout << "Original list: ";
   list.displayList();
