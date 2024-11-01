@@ -146,11 +146,9 @@ int main() {
   cout << "Coped List: ";
   copiedList.displayList();
 
-  //   DoublyLinkedList emptyList;
-  list.clear();
+  DoublyLinkedList emptyList;
+  emptyList.displayList();
   cout << "Empty List: ";
-  list.displayList();
-  //   emptyList.displayList();
 
   return 0;
 }
