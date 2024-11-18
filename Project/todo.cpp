@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 
+// modify existing task
+// delete a task from existing list
+
 struct Node {
   std::string data;
   Node *prev;
@@ -34,6 +37,24 @@ public:
     }
   }
 
+  void deleteTask(int position) {
+    if (head == nullptr || position <= 0) {
+      std::cout << "Invalid item number or empty list." << "\n";
+      return;
+    }
+    Node *current = head;
+
+    // traverse to chosen item
+    for (int i = 1; i < position && current != nullptr; i++) {
+      current = current->next;
+    }
+    if (current == nullptr) {
+      std::cout << "Item does not exist" << "\n";
+      return;
+    }
+  }
+
+  // display todo list items
   void showItems() {
     Node *current = head;
     int count = 1;
@@ -64,5 +85,8 @@ int main() {
 
   std::cout << "Todo items in list: " << "\n";
   taskManager.showItems();
+
+  std::cout << "Removed item new list: " << "\n";
+  taskManager.deleteTask();
   return 0;
 }
