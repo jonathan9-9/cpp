@@ -30,6 +30,23 @@ public:
     }
   }
 
+  void updateTask(int position, const std::string &newData) {
+    if (head == nullptr) {
+      std::cout << "Item to update does not exist" << "\n";
+    }
+
+    Node *current = head;
+    for (int i = 1; i < position && current != nullptr; i++) {
+      current = current->next;
+    }
+
+    if (current != nullptr || position <= 0) {
+      std::cout << "The item does not exist or is an invalid." << "\n";
+    }
+
+    current->data = newData;
+  }
+
   void deleteTask(int position) {
     if (head == nullptr || position <= 0) {
       std::cout << "Invalid item number or empty list." << "\n";
