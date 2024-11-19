@@ -1,94 +1,123 @@
 #include <iostream>
 #include <string>
 
-// modify existing task
-
+// Node struct to define data, prev and next pointers
 struct Node {
   std::string data;
   Node *prev;
   Node *next;
 
+  // constructor to initialize data, prev and next pointers
   Node(const std::string &value) : data(value), prev(nullptr), next(nullptr) {}
 };
 
+// task management class
 class TaskManagement {
+  // private member fields head and tail of type Node
 private:
   Node *head;
   Node *tail;
 
+  // public member functions
 public:
   TaskManagement() : head(nullptr), tail(nullptr) {}
-  // add new task after head node
+  // add new task
   void addTask(const std::string &value) {
+    // pass data into newly created node object
     Node *newNode = new Node(value);
+    // if no nodes exist initialize head and tail to a new instance of newNode
+    // object
     if (head == nullptr) {
       head = tail = newNode;
+      // otherwise add a new node after the tail in the doubly linked list
     } else {
       tail->next = newNode;
       newNode->prev = tail;
+      // set the tail as the new node created
       tail = newNode;
     }
   }
 
+  // update existing task
   void updateTask(int position, const std::string &newData) {
+    // if no node exists then doubly linked list is empty
     if (head == nullptr) {
       std::cout << "Item to update does not exist" << "\n";
     }
 
+    // initialize current node to the head
     Node *current = head;
+    // traverse up to and including the item (node) to be updated based on the
+    // position in the list
     for (int i = 1; i < position && current != nullptr; i++) {
       current = current->next;
     }
 
+    // current node is null or the position is out of bounds raise an exception
     if (current == nullptr || position <= 0) {
-      std::cout << "The item does not exist or is an invalid item." << "\n";
+      std::cerr << "The item does not exist or is an invalid item." << "\n";
     }
 
+    // current represents the node where it left off from the position in the
+    // for loop to update and insert new data into that node
     current->data = newData;
   }
 
+  // function to delete task based on position
   void deleteTask(int position) {
+    // terminate function if position is out of bounds or there node is absent
     if (head == nullptr || position <= 0) {
       std::cout << "Invalid item number or empty list." << "\n";
       return;
     }
+    // set current to head
     Node *current = head;
 
     // traverse to chosen item
     for (int i = 1; i < position && current != nullptr; i++) {
       current = current->next;
     }
+
+    // if current node to be deleted is empty then item does not exist so
+    // terminate fn
     if (current == nullptr) {
       std::cout << "Item does not exist" << "\n";
       return;
     }
-    // if task is head
+    // delete head node by setting to null and traverse to next node over from
+    // current head to become new head
     if (current == head) {
       head = head->next;
       if (head != nullptr) {
         head->prev = nullptr;
       }
+      // otherwise if current is not head and prev node from current exists set
+      // prev node's pointer to next node from current
     } else {
       // update previous node's next pointer
       if (current->prev != nullptr) {
         current->prev->next = current->next;
       }
     }
-    // if task is not head or tail
+    // if task (node) from current exists set current next's node to prev node
+    // from current
     if (current->next != nullptr) {
       current->next->prev = current->prev;
     }
 
-    // if task is tail
+    // if task or current node is tail delete current tail and set prev node to
+    // tail
     if (current == tail) {
       tail = current->prev;
     }
+    // delete current node based on position
     delete current;
   }
 
   // display todo list items
   void showItems() {
     Node *current = head;
+    // number to specify ordered item in the list
     int count = 1;
     while (current != nullptr) {
       std::cout << count << ") " << current->data << " ";
@@ -98,6 +127,7 @@ public:
     }
     std::cout << std::endl;
   }
+  // destructor to free allocated memory
   ~TaskManagement() {
     Node *current = head;
     while (current != nullptr) {
@@ -110,25 +140,33 @@ public:
 
 int main() {
   TaskManagement taskManager;
+  // data item to add or update to node
   std::string item;
+  // position of item to update or delete
   int taskToDelete, taskToUpdate;
+  // user's answer to yes or no
   char userAns;
 
   std::cout << "Enter item to add to your TODO list: " << "\n";
 
   std::cout << "Type quit to exit program" << "\n";
+  // if user does not enter 'quit' user is asked to enter new item into list
   while (item != "quit") {
 
     std::getline(std::cin, item);
+    // skip if item is quit to exclude from list
     if (item == "quit") {
       continue;
     }
+    // add item to task list
     taskManager.addTask(item);
   }
 
   std::cout << "List of TODO items: " << "\n";
+  // show items in the list
   taskManager.showItems();
 
+  // driver program to delete or update a task and display items
   std::cout << "Do you want to delete an item? (y/n)" << "\n";
   std::cin >> userAns;
   if (userAns == 'y') {
@@ -141,6 +179,8 @@ int main() {
     taskManager.showItems();
   }
 
+  // if user updates item it returns updated list otherwise returns the previous
+  // constructed list
   std::cout << "Do you want to update an item? (y/n)" << "\n";
   std::cin >> userAns;
   if (userAns == 'y') {
