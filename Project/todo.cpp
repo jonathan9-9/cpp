@@ -40,8 +40,8 @@ public:
       current = current->next;
     }
 
-    if (current != nullptr || position <= 0) {
-      std::cout << "The item does not exist or is an invalid." << "\n";
+    if (current == nullptr || position <= 0) {
+      std::cout << "The item does not exist or is an invalid item." << "\n";
     }
 
     current->data = newData;
@@ -111,7 +111,7 @@ public:
 int main() {
   TaskManagement taskManager;
   std::string item;
-  int taskToDelete;
+  int taskToDelete, taskToUpdate;
   char userAns;
 
   std::cout << "Enter item to add to your TODO list: " << "\n";
@@ -138,6 +138,19 @@ int main() {
     std::cout << "Deleting task " << taskToDelete << "..." << "\n";
     taskManager.deleteTask(taskToDelete);
     std::cout << "Updated todo list: " << "\n";
+    taskManager.showItems();
+  }
+
+  std::cout << "Do you want to update an item? (y/n)" << "\n";
+  std::cin >> userAns;
+  if (userAns == 'y') {
+    std::cout << "Enter the number of the task to update: ";
+    std::cin >> taskToUpdate;
+    std::cin.ignore();
+    std::cout << "Enter the new task: ";
+    std::getline(std::cin, item);
+    taskManager.updateTask(taskToUpdate, item);
+    std::cout << "Updated TODO list: " << "\n";
     taskManager.showItems();
   } else {
     taskManager.showItems();
