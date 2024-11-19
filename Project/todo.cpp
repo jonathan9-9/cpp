@@ -120,7 +120,7 @@ public:
     // number to specify ordered item in the list
     int count = 1;
     while (current != nullptr) {
-      std::cout << count << ") " << current->data << " ";
+      std::cout << "\t\t" << count << ") " << current->data << " ";
       current = current->next;
       std::cout << std::endl;
       count++;
