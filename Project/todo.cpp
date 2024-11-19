@@ -38,6 +38,21 @@ public:
     }
   }
 
+  void searchTodo(std::string const &keyword) {
+    Node *current = head;
+    bool found = false;
+    while (current != nullptr) {
+      if (current->data.find(keyword) != std::string::npos) {
+        std::cout << "Item: " << current->data << std::endl;
+        found = true;
+      }
+      current = current->next;
+    }
+    if (!found) {
+      std::cout << "The item you are looking for does not exist" << std::endl;
+    }
+  }
+
   // update existing task
   void updateTask(int position, const std::string &newData) {
     // if no node exists then doubly linked list is empty
@@ -147,6 +162,8 @@ int main() {
   // user's answer to yes or no
   char userAns;
 
+  std::string keyword;
+
   std::cout << "Enter item to add to your TODO list: " << "\n";
 
   std::cout << "Type quit to exit program" << "\n";
@@ -192,6 +209,15 @@ int main() {
     taskManager.updateTask(taskToUpdate, item);
     std::cout << "Updated TODO list: " << "\n";
     taskManager.showItems();
+  }
+
+  std::cout << "Are you looking for an item in your todo list? (y/n)" << "\n";
+  std::cin >> userAns;
+  if (userAns == 'y') {
+    std::cout << "Enter a keyword to search: ";
+    std::cin >> keyword;
+    taskManager.searchTodo(keyword);
+
   } else {
     taskManager.showItems();
   }
