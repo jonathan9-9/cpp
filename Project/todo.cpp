@@ -42,6 +42,8 @@ public:
     Node *current = head;
     bool found = false;
     while (current != nullptr) {
+      // return npos if item is not found or return the string data if keyword
+      // matches
       if (current->data.find(keyword) != std::string::npos) {
         std::cout << "Item: " << current->data << std::endl;
         found = true;
