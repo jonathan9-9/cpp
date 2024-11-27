@@ -244,7 +244,9 @@ int main() {
     cout << "6. Display tasks\n";
     cout << "7. Exit\n";
     cin >> userAns;
-    if (userAns == 1) {
+
+    switch (userAns) {
+    case 1:
       cout << "Enter the new task: ";
       cin.ignore();
       getline(cin, newTask);
@@ -253,8 +255,8 @@ int main() {
       cout << "Task added successfully.\n";
       cout << "Updated to-do list: " << "\n";
       taskManager.showItems();
-    }
-    if (userAns == 2) {
+      break;
+    case 2:
       cout << "Enter the number of the task to delete: ";
       cin >> taskToDelete;
       cout << "Deleting task...\n";
@@ -262,8 +264,8 @@ int main() {
       cout << "Task deleted successfully.\n";
       cout << "Updated todo list: " << "\n";
       taskManager.showItems();
-    }
-    if (userAns == 3) {
+      break;
+    case 3:
       cout << "Enter the number of the task to edit: ";
       cin >> taskToUpdate;
       cin.ignore();
@@ -272,22 +274,29 @@ int main() {
       taskManager.updateTask(taskToUpdate, item);
       cout << "Updated TODO list: " << "\n";
       taskManager.showItems();
-    }
-    if (userAns == 4) {
+      break;
+    case 4:
       cout << "Enter the number of the task to be marked as done: ";
       cin >> taskToUpdate;
       taskManager.markTaskAsDone(taskToUpdate);
       cout << "\nHere is your updated to-do list: ";
       taskManager.showItems();
-    }
-    if (userAns == 5) {
+      break;
+    case 5:
       cout << "Enter one keyword to search for a task: ";
       cin >> taskToSearch;
       cout << "Searching for task...\n";
       taskManager.searchTodo(taskToSearch);
-    }
-    if (userAns == 6) {
+      break;
+    case 6:
       taskManager.showItems();
+      break;
+    case 7:
+      cout << "Exiting..." << "\n";
+      break;
+    default:
+      cout << "Please enter a valid selection." << "\n";
+      break;
     }
   }
 }
